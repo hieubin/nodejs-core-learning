@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int           @id @default(autoincrement())
+  name      String
+  email     String        @unique
+  phone     String?
+  profile   UserProfile?
+  posts     Post[]
+  createdAt DateTime      @default(now())
+}
+
+model UserProfile {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio       String?
+  website   String?
+  createdAt DateTime @default(now())
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  Int
+  createdAt DateTime @default(now())
+}
+
+model Author {
+  id        Int      @id @default(autoincrement())
+  name      String
+  bio       String?
+  books     Book[]
+  createdAt DateTime @default(now())
+}
+
+model Book {
+  id         Int             @id @default(autoincrement())
+  title      String
+  price      Float?
+  author     Author          @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  authorId   Int
+  categories BookCategory[]
+  createdAt  DateTime        @default(now())
+}
+
+model Category {
+  id         String          @id @default(uuid())
+  name       String          @unique
+  description String?
+  books      BookCategory[]
+  createdAt  DateTime        @default(now())
+}
+
+model BookCategory {
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId     Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+  createdAt  DateTime @default(now())
+
+  @@id([bookId, categoryId])
+}
