@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "Day8-Prisma-MVC",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "day8-prisma-mvc"
+  },
+  "item": [
+    {
+      "name": "Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"name\": \"Test User\", \"email\": \"unique@example.com\", \"phone\": \"0123456789\" }" },
+        "url": { "raw": "http://localhost:3000/users", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["users"] }
+      }
+    },
+    {
+      "name": "Get Users",
+      "request": { "method": "GET", "header": [], "url": { "raw": "http://localhost:3000/users", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["users"] } }
+    },
+    {
+      "name": "Get User by ID",
+      "request": { "method": "GET", "header": [], "url": { "raw": "http://localhost:3000/users/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["users","1"] } }
+    },
+    {
+      "name": "Update User",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"name\": \"Updated\", \"email\": \"unique@example.com\", \"phone\": \"099\" }" },
+        "url": { "raw": "http://localhost:3000/users/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["users","1"] }
+      }
+    },
+    {
+      "name": "Delete User",
+      "request": { "method": "DELETE", "header": [], "url": { "raw": "http://localhost:3000/users/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["users","1"] } }
+    },
+    {
+      "name": "Create Post",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"title\": \"First Post\", \"content\": \"Hello\", \"authorId\": 1 }" },
+        "url": { "raw": "http://localhost:3000/posts", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["posts"] }
+      }
+    },
+    { "name": "Get Posts", "request": { "method": "GET", "header": [], "url": { "raw": "http://localhost:3000/posts", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["posts"] } } },
+    { "name": "Get Post by ID", "request": { "method": "GET", "header": [], "url": { "raw": "http://localhost:3000/posts/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["posts","1"] } } },
+    {
+      "name": "Update Post",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"title\": \"Updated\", \"content\": \"New\", \"authorId\": 1 }" },
+        "url": { "raw": "http://localhost:3000/posts/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["posts","1"] }
+      }
+    },
+    { "name": "Delete Post", "request": { "method": "DELETE", "header": [], "url": { "raw": "http://localhost:3000/posts/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["posts","1"] } } }
+  ]
+}
