@@ -2,8 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import usersRouter from './routes/users.routes.js';
 import postsRouter from './routes/posts.routes.js';
+import authRouter from './routes/auth.routes.js';
 import cors from 'cors';
 import errorHandler from './middlewares/errorHandler.js';
+import sessionMiddleware from './middlewares/session.js';
 
 dotenv.config();
 
@@ -13,6 +15,9 @@ app.use(express.json());
 // CORS for local Angular dev
 app.use(cors({ origin: 'http://localhost:4200' }));
 
+app.use(sessionMiddleware);
+
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 
