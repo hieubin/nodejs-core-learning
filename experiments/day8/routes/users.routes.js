@@ -1,10 +1,10 @@
 import express from 'express';
 import * as usersCtrl from '../controllers/users.controller.js';
-import { validateCreateUser, validateIdParam } from '../middlewares/validators.js';
+import { validateIdParam } from '../middlewares/validators.js';
 
 const router = express.Router();
 
-router.post('/', validateCreateUser, usersCtrl.create);
+router.post('/', usersCtrl.create);
 router.get('/', usersCtrl.findMany);
 router.get('/:id', validateIdParam, usersCtrl.findById);
 router.put('/:id', validateIdParam, usersCtrl.update);

@@ -1,13 +1,8 @@
 import * as usersService from '../services/users.service.js';
+import HttpError from '../errors/httpError.js';
 
 export async function create(req, res, next) {
-  try {
-    const { name, email, phone } = req.body;
-    const user = await usersService.createUser({ name, email, phone });
-    res.status(201).json(user);
-  } catch (error) {
-    next(error);
-  }
+  next(new HttpError(410, 'Use POST /auth/register to create a user'));
 }
 
 export async function findMany(req, res, next) {

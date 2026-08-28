@@ -6,11 +6,16 @@ export async function createPost(data) {
 }
 
 export async function findPosts() {
-  return prisma.post.findMany({ include: { author: true } });
+  return prisma.post.findMany({
+    include: { author: { select: { id: true, name: true, email: true } } },
+  });
 }
 
 export async function findPostById(id) {
-  const post = await prisma.post.findUnique({ where: { id }, include: { author: true } });
+  const post = await prisma.post.findUnique({
+    where: { id },
+    include: { author: { select: { id: true, name: true, email: true } } },
+  });
   if (!post) throw new HttpError(404, 'Post not found');
   return post;
 }

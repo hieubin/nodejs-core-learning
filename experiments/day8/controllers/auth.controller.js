@@ -11,9 +11,9 @@ export async function register(req, res, next) {
 
 export async function login(req, res, next) {
   try {
-    const user = await authService.loginUser(req.body);
+    const { user, token } = await authService.loginUser(req.body);
     req.session.userId = user.id;
-    res.json(user);
+    res.json({ token, user });
   } catch (error) {
     next(error);
   }
@@ -21,7 +21,7 @@ export async function login(req, res, next) {
 
 export async function me(req, res, next) {
   try {
-    const user = await authService.findCurrentUser(req.session.userId);
+    const user = await authService.findCurrentUser(req.user.id);
     res.json(user);
   } catch (error) {
     next(error);
