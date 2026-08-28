@@ -12,7 +12,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// CORS for local Angular dev
 app.use(cors({ origin: 'http://localhost:4200' }));
 
 app.use(sessionMiddleware);

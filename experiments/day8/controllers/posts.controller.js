@@ -2,8 +2,8 @@ import * as postsService from '../services/posts.service.js';
 
 export async function create(req, res, next) {
   try {
-    const { title, content, authorId } = req.body;
-    const post = await postsService.createPost({ title, content, authorId });
+    const { title, content } = req.body;
+    const post = await postsService.createPost({ title, content, authorId: req.user.id });
     res.status(201).json(post);
   } catch (error) {
     next(error);
@@ -32,8 +32,8 @@ export async function findById(req, res, next) {
 export async function update(req, res, next) {
   try {
     const id = Number(req.params.id);
-    const { title, content, authorId } = req.body;
-    const post = await postsService.updatePost(id, { title, content, authorId });
+    const { title, content } = req.body;
+    const post = await postsService.updatePost(id, { title, content });
     res.json(post);
   } catch (error) {
     next(error);

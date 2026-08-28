@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import prisma from '../lib/prisma.js';
+import { signToken } from '../lib/jwt.js';
 import HttpError from '../errors/httpError.js';
 
 const saltRounds = 12;
@@ -30,7 +31,8 @@ export async function loginUser({ email, password }) {
   const passwordMatches = user && await bcrypt.compare(password, user.passwordHash);
   if (!passwordMatches) throw new HttpError(401, 'Invalid email or password');
 
-  return toSafeUser(user);
+  const safeUser = toSafeUser(user);
+  return { user: safeUser, token: signToken({ userId: safeUser.id }) };
 }
 
 export async function findCurrentUser(userId) {

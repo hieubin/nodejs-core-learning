@@ -1,16 +1,5 @@
 import HttpError from '../errors/httpError.js';
 
-export function validateCreateUser(req, res, next) {
-  const { name, email } = req.body || {};
-  if (!name || typeof name !== 'string' || !name.trim()) {
-    return next(new HttpError(400, 'Name is required'));
-  }
-  if (!email || typeof email !== 'string' || !email.trim()) {
-    return next(new HttpError(400, 'Email is required'));
-  }
-  next();
-}
-
 export function validateRegister(req, res, next) {
   const { name, email, password } = req.body || {};
   if (!name || typeof name !== 'string' || !name.trim()) {
@@ -37,12 +26,9 @@ export function validateLogin(req, res, next) {
 }
 
 export function validateCreatePost(req, res, next) {
-  const { title, authorId } = req.body || {};
+  const { title } = req.body || {};
   if (!title || typeof title !== 'string' || !title.trim()) {
     return next(new HttpError(400, 'Title is required'));
-  }
-  if (authorId === undefined || authorId === null || Number.isNaN(Number(authorId)) || !Number.isInteger(Number(authorId))) {
-    return next(new HttpError(400, 'authorId must be an integer'));
   }
   next();
 }
